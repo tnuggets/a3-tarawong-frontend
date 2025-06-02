@@ -7,7 +7,7 @@ import profileView from "./views/pages/profile"
 import editProfileView from "./views/pages/editProfile"
 import onboardingView from "./views/pages/onboarding"
 import projectsView from "./views/pages/projects"
-import talentView from "./views/pages/talents"
+import talentView from "./views/pages/talent"
 import messagesView from "./views/pages/messages"
 import favouriteProjectsView from "./views/pages/favouriteProjects"
 import newProjectView from "./views/pages/newProject"
@@ -18,7 +18,7 @@ const routes = {
   "/": homeView,
   "/onboarding": onboardingView,
   "/browseProjects": projectsView,
-  "/talent": talentView,
+  "/browseTalent": talentView,
   "/messages": messagesView,
   "/favouriteProjects": favouriteProjectsView,
   404: fourOFourView,

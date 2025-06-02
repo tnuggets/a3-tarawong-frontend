@@ -26,46 +26,22 @@ class SignUpView {
 
   render() {
     const template = html`
-      <div class="page-content page-centered">
+      <div class="page-content page-centered signinup-page">
+        <img class="signinup-logo" src="/images/logo.svg" />
         <div class="signinup-box">
-          <img class="signinup-logo" src="/images/logo.svg" />
           <h1>Sign Up</h1>
-          <form
-            class="input-validation-required"
-            @submit="${this.signUpSubmitHandler}"
-          >
+          <form class="input-validation-required" @submit="${this.signUpSubmitHandler}">
             <div class="input-group">
-              <sl-input
-                name="firstName"
-                type="text"
-                placeholder="First Name"
-                required
-              ></sl-input>
+              <sl-input name="firstName" type="text" placeholder="First Name" required></sl-input>
             </div>
             <div class="input-group">
-              <sl-input
-                name="lastName"
-                type="text"
-                placeholder="Last Name"
-                required
-              ></sl-input>
+              <sl-input name="lastName" type="text" placeholder="Last Name" required></sl-input>
             </div>
             <div class="input-group">
-              <sl-input
-                name="email"
-                type="email"
-                placeholder="Email"
-                required
-              ></sl-input>
+              <sl-input name="email" type="email" placeholder="Email" required></sl-input>
             </div>
             <div class="input-group">
-              <sl-input
-                name="password"
-                type="password"
-                placeholder="Password"
-                required
-                toggle-password
-              ></sl-input>
+              <sl-input name="password" type="password" placeholder="Password" required toggle-password></sl-input>
             </div>
             <div class="input-group">
               <sl-select name="accessLevel" placeholder="I am a...">
@@ -73,17 +49,9 @@ class SignUpView {
                 <sl-option value="2">Talent</sl-option>
               </sl-select>
             </div>
-            <sl-button
-              variant="primary"
-              type="submit"
-              class="submit-btn"
-              style="width: 100%;"
-              >Sign Up</sl-button
-            >
+            <sl-button variant="primary" type="submit" class="submit-btn" style="width: 100%;">Sign me up!</sl-button>
           </form>
-          <p>
-            Have an account? <a href="/signin" @click=${anchorRoute}>Sign In</a>
-          </p>
+          <p>Have an account? <a href="/signin" @click=${anchorRoute}>Sign In</a></p>
         </div>
       </div>
     `

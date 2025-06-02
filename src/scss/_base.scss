@@ -13,6 +13,8 @@ body {
   font-weight: 300;
   background: var(--body-bg);
   height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 // headings ------------
@@ -74,25 +76,24 @@ a {
 
 // root ---------------
 #root {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative; // changed from absolute
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
 }
 
 // page --------------------
 .page-content {
-  position: absolute;
-  top: var(--app-header-height);
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow-y: scroll;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
   padding: 1em;
+  padding-top: var(--app-header-height);
+
   &.no-pad {
     padding: 0;
+    padding-top: var(--app-header-height);
   }
 }
 
@@ -103,15 +104,76 @@ a {
 }
 
 // sign in + sign up pages ----------
-.signinup-box,
-.signup-box {
-  max-width: 320px;
+.signinup-page {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-image: url("../../static/images/orange-bg.jpg"); // ✅ absolute path
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5); // dark overlay
+    z-index: 0;
+  }
+}
+
+.signinup-box {
+  background-color: #0f0f0f;
+  color: #ffffff;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
   text-align: center;
+  backdrop-filter: blur(8px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .input-group {
+    width: 100%;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: #ccc;
+
+    a {
+      color: #ff5c00;
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 .signinup-logo {
-  width: 200px;
-  margin-bottom: 1em;
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  width: 120px;
+  z-index: 10;
 }
 
 // guide page ---------------
@@ -143,6 +205,11 @@ a {
 }
 .project-dialog::part(header-actions) {
   z-index: 1;
+}
+
+// edit profile page ---------------
+.edit-profile-page {
+  background-color: #f5f5f5;
 }
 
 // RESPONSIVE - MOBILE -------------------

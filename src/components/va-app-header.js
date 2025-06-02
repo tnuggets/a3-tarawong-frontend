@@ -28,9 +28,7 @@ customElements.define(
 
     navActiveLinks() {
       const currentPath = window.location.pathname
-      const navLinks = document.querySelectorAll(
-        ".app-top-nav a, .app-side-menu-items a"
-      )
+      const navLinks = document.querySelectorAll(".app-top-nav a, .app-side-menu-items a")
       navLinks.forEach((navLink) => {
         if (navLink.href.slice(-1) == "#") return
         if (navLink.pathname === currentPath) {
@@ -166,40 +164,26 @@ customElements.define(
           ></sl-icon-button>
 
           <div class="app-header-main">
-            ${this.title
-              ? html` <h1 class="page-title">${this.title}</h1> `
-              : ``}
+            ${this.title ? html` <h1 class="page-title">${this.title}</h1> ` : ``}
             <slot></slot>
           </div>
 
           <nav class="app-top-nav">
             <a href="/" @click="${anchorRoute}">Home</a>
-            ${this.user.accessLevel == 2
-              ? html`
-                  <a href="/newProject" @click="${anchorRoute}">Add Project</a>
-                `
-              : ""}
+            ${this.user.accessLevel == 2 ? html` <a href="/newProject" @click="${anchorRoute}">Add Project</a> ` : ""}
 
             <sl-dropdown>
               <a slot="trigger" href="#" @click="${(e) => e.preventDefault()}">
                 <sl-avatar
                   style="--size: 24px;"
-                  image=${this.user && this.user.avatar
-                    ? `${App.apiBase}/images/${this.user.avatar}`
-                    : ""}
+                  image=${this.user && this.user.avatar ? `${App.apiBase}/images/${this.user.avatar}` : ""}
                 ></sl-avatar>
                 ${this.user && this.user.firstName}
               </a>
               <sl-menu>
-                <sl-menu-item @click="${() => gotoRoute("/profile")}"
-                  >Profile</sl-menu-item
-                >
-                <sl-menu-item @click="${() => gotoRoute("/editProfile")}"
-                  >Edit Profile</sl-menu-item
-                >
-                <sl-menu-item @click="${() => Auth.signOut()}"
-                  >Sign Out</sl-menu-item
-                >
+                <sl-menu-item @click="${() => gotoRoute("/profile")}">Profile</sl-menu-item>
+                <sl-menu-item @click="${() => gotoRoute("/editProfile")}">Edit Profile</sl-menu-item>
+                <sl-menu-item @click="${() => Auth.signOut()}">Sign Out</sl-menu-item>
               </sl-menu>
             </sl-dropdown>
           </nav>
@@ -210,20 +194,12 @@ customElements.define(
           <nav class="app-side-menu-items">
             <a href="/" @click="${this.menuClick}">Home</a>
             ${this.user.accessLevel == 2
-              ? html`
-                  <a href="/newProject" @click="${this.menuClick}"
-                    >Add Project</a
-                  >
-                `
+              ? html` <a href="/newProject" @click="${this.menuClick}">Add Project</a> `
               : ""}
-            <a href="/browseProjects" @click="${this.menuClick}"
-              >Browse Projects</a
-            >
-            <a href="/talent" @click="${this.menuClick}">Browse Talent</a>
+            <a href="/browseProjects" @click="${this.menuClick}">Browse Projects</a>
+            <a href="/browseTalent" @click="${this.menuClick}">Browse Talent</a>
             <a href="/messages" @click="${this.menuClick}">Messages</a>
-            <a href="/favouriteProjects" @click="${this.menuClick}"
-              >Favourite Projects</a
-            >
+            <a href="/favouriteProjects" @click="${this.menuClick}">Favourite Projects</a>
             <a href="/profile" @click="${this.menuClick}">Profile</a>
             <a href="#" @click="${() => Auth.signOut()}">Sign Out</a>
           </nav>

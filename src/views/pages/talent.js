@@ -13,10 +13,7 @@ class TalentView {
 
   render() {
     const template = html`
-      <va-app-header
-        title="Browse Talent"
-        user="${JSON.stringify(Auth.currentUser)}"
-      ></va-app-header>
+      <va-app-header title="Browse Talent" user="${JSON.stringify(Auth.currentUser)}"></va-app-header>
       <div class="page-content">
         <h1>Browse Talent</h1>
         <p>Page content ...</p>

@@ -32,10 +32,7 @@ class EditProfileView {
     submitBtn.setAttribute("loading", "")
     try {
       const formData = new FormData(e.target)
-      const updatedUser = await UserAPI.updateUser(
-        Auth.currentUser._id,
-        formData
-      )
+      const updatedUser = await UserAPI.updateUser(Auth.currentUser._id, formData)
       delete updatedUser.password
       this.user = updatedUser
       Auth.currentUser = updatedUser
@@ -49,24 +46,13 @@ class EditProfileView {
 
   render() {
     const template = html`
-      <va-app-header
-        title="Edit Profile"
-        user=${JSON.stringify(Auth.currentUser)}
-      ></va-app-header>
-      <div class="page-content">
+      <va-app-header title="Edit Profile" user=${JSON.stringify(Auth.currentUser)}></va-app-header>
+      <div class="page-content edit-profile-page">
         ${this.user == null
           ? html` <sl-spinner></sl-spinner> `
           : html`
-              <p>
-                Updated:
-                ${moment(Auth.currentUser.updatedAt).format(
-                  "MMMM Do YYYY, @ h:mm a"
-                )}
-              </p>
-              <form
-                class="page-form input-validation-required"
-                @submit=${this.updateProfileSubmitHandler.bind(this)}
-              >
+              <p>Updated: ${moment(Auth.currentUser.updatedAt).format("MMMM Do YYYY, @ h:mm a")}</p>
+              <form class="page-form input-validation-required" @submit=${this.updateProfileSubmitHandler.bind(this)}>
                 <div class="input-group">
                   <sl-input
                     type="text"
@@ -75,6 +61,7 @@ class EditProfileView {
                     placeholder="First Name"
                   ></sl-input>
                 </div>
+                <sl-icon name="pencil"></sl-icon>
                 <div class="input-group">
                   <sl-input
                     type="text"
@@ -84,35 +71,21 @@ class EditProfileView {
                   ></sl-input>
                 </div>
                 <div class="input-group">
-                  <sl-input
-                    type="text"
-                    name="email"
-                    value="${this.user.email}"
-                    placeholder="Email Address"
-                  ></sl-input>
+                  <sl-input type="text" name="email" value="${this.user.email}" placeholder="Email Address"></sl-input>
                 </div>
                 <div class="input-group">
-                  <sl-textarea
-                    name="bio"
-                    rows="4"
-                    placeholder="Bio"
-                    value="${this.user.bio}"
-                  ></sl-textarea>
+                  <sl-textarea name="bio" rows="4" placeholder="Bio" value="${this.user.bio}"></sl-textarea>
                 </div>
                 <div class="input-group">
                   <label>Avatar</label><br />
                   ${this.user.avatar
                     ? html`
-                        <sl-avatar
-                          image="${App.apiBase}/images/${this.user.avatar}"
-                        ></sl-avatar>
+                        <sl-avatar image="${App.apiBase}/images/${this.user.avatar}"></sl-avatar>
                         <input type="file" name="avatar" />
                       `
                     : html` <input type="file" name="avatar" /> `}
                 </div>
-                <sl-button variant="primary" type="submit" class="submit-btn"
-                  >Update Profile</sl-button
-                >
+                <sl-button variant="primary" type="submit" class="submit-btn">Update Profile</sl-button>
               </form>
             `}
       </div>
