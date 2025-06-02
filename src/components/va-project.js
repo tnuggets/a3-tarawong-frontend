@@ -20,7 +20,7 @@ customElements.define(
         name: {
           type: String,
         },
-        description: {
+        overview: {
           type: String,
         },
         price: {
@@ -81,7 +81,7 @@ customElements.define(
           </div>
           <div class="content">
             <h1>${this.name}</h1>
-            <p>${this.description}</p>
+            <p>${this.overview}</p>
             <p class="price">$${this.price}</p>
             <p class="gender">Gender: <span>${this.gender}</span></p>
             <p class="length">Length: <span>${this.length}</span></p>
@@ -130,9 +130,7 @@ customElements.define(
           <h2>${this.name}</h2>
           <h3>$${this.price}</h3>
           <p class="author">By ${this.user.firstName} ${this.user.lastName}</p>
-          <sl-button @click=${this.moreInfoHandler.bind(this)}
-            >More Info</sl-button
-          >
+          <sl-button @click=${this.moreInfoHandler.bind(this)}>More Info</sl-button>
           <sl-icon-button
             name="heart-fill"
             label="Add to favourites"

@@ -127,9 +127,10 @@ customElements.define(
           }
 
           .app-side-menu-logo {
-            width: 120px;
+            width: 80px;
             margin-bottom: 1em;
-            position: absolute;
+            position: static;
+            display: block;
             top: 2em;
             left: 1.5em;
           }
@@ -192,7 +193,7 @@ customElements.define(
         <sl-drawer class="app-side-menu" placement="start" class="drawer">
           <img class="app-side-menu-logo" src="/images/logo.svg" />
           <nav class="app-side-menu-items">
-            <a href="/" @click="${this.menuClick}">Home</a>
+            <a href="/" @click="${this.menuClick}">Dashboard</a>
             ${this.user.accessLevel == 2
               ? html` <a href="/newProject" @click="${this.menuClick}">Add Project</a> `
               : ""}

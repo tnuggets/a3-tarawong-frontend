@@ -199,7 +199,7 @@ class ProjectsView {
                       class="project-card"
                       id="${project._id}"
                       name="${project.name}"
-                      description="${project.description}"
+                      overview="${project.overview}"
                       price="${project.price}"
                       user=${JSON.stringify(project.user)}
                       image="${project.image}"

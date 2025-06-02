@@ -21,6 +21,14 @@ sl-button::part(base) {
   font-weight: 600;
 }
 
+sl-button[disabled]::part(base) {
+  opacity: 0.6;
+  filter: grayscale(40%);
+  cursor: not-allowed;
+  background-color: #ccc !important; // or a shade matching your palette
+  color: #fff !important;
+}
+
 // sign in/up --------------------------
 sl-button.submit-btn::part(base) {
   background: linear-gradient(135deg, #bb2707, #ff5c00);
@@ -36,6 +44,93 @@ sl-button.submit-btn::part(base):hover {
   background: linear-gradient(135deg, #ff8e1a, #ff6a1a);
 }
 
+// onboarding ---------------------------
+.continue-btn-wrapper {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  z-index: 1000; // Ensures it stays above content
+}
+
+// onboarding 1 --------------------------
+sl-button.talentOBBtn::part(base),
+sl-button.visionaryOBBtn::part(base) {
+  width: 300px; // or any value you like (e.g., 160px, 200px)
+  height: 300px;
+  min-width: 0; // prevent default min-width from Shoelace
+  min-height: 0;
+  border-radius: 1rem;
+  border: none;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0; // to ensure square shape
+  box-sizing: border-box;
+  margin: 2em; // space between the squares
+  background-size: cover; // if using background images
+  background-position: center;
+}
+
+sl-button.talentOBBtn::part(base) {
+  background-image: url("../../static/images/talent-bg.jpg");
+}
+
+sl-button.visionaryOBBtn::part(base) {
+  background-image: url("../../static/images/visionary-bg.jpg");
+}
+
+sl-button.talentOBBtn::part(label),
+sl-button.visionaryOBBtn::part(label) {
+  margin-top: 15em; // Moves the text down inside the square
+}
+
+//onboarding 3 --------------------------
+.onboarding-locations {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em; // space between buttons
+  justify-items: center;
+  margin-top: 2em;
+}
+
+sl-button.locationOBBtn::part(base) {
+  width: 200px;
+  height: 200px;
+  min-width: 0;
+  min-height: 0;
+  border-radius: 1em;
+  border: none;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s;
+}
+
+sl-button.locationOBBtn::part(base):hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+sl-button.locationOBBtn.selected::part(base) {
+  background-color: #b33e00; // a darker orange, adjust to your preferred shade
+  outline: 3px solid #ff5c00;
+  box-shadow: 0 0 0 3px #ffb47b, inset 0 3px 12px rgba(0, 0, 0, 0.18);
+  transform: scale(0.96);
+}
+
+sl-button.locationOBBtn.selected::part(label) {
+  transform: translateY(2px);
+}
+
 // RESPONSIVE - MOBILE -------------------
 @media all and (max-width: 768px) {
   sl-dialog::part(panel) {
@@ -43,5 +138,22 @@ sl-button.submit-btn::part(base):hover {
     height: 100%;
     max-height: none;
     max-width: none;
+  }
+}
+@media all and (max-width: 768px) {
+  .onboarding-locations {
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+  }
+
+  sl-button.locationOBBtn::part(base) {
+    width: 120px;
+    height: 120px;
+    font-size: 1em;
+  }
+
+  .continue-btn-wrapper {
+    right: 1em;
+    bottom: 1em;
   }
 }

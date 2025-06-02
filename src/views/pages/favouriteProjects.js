@@ -27,12 +27,30 @@ class FavouriteProjectsView {
   }
 
   render() {
+    const isTalent = Auth.currentUser.accessLevel == 1
+    const isVisionary = Auth.currentUser.accessLevel == 2
+
     const template = html`
-      <va-app-header
-        title="Profile"
-        user="${JSON.stringify(Auth.currentUser)}"
-      ></va-app-header>
+      <va-app-header title="Dashboard" user="${JSON.stringify(Auth.currentUser)}"></va-app-header>
       <div class="page-content">
+        <h1 class="anim-in">Hey ${Auth.currentUser.firstName}!</h1>
+        ${isTalent
+          ? html`
+              <p>Looks like you haven't saved any projects yet</p>
+              <sl-button class="anim-in" @click=${() => gotoRoute("/browseProjects")}>
+                Check out more projects
+              </sl-button>
+            `
+          : ""}
+        ${isVisionary
+          ? html`
+              <p>Looks like you haven't saved any talents yet</p>
+              <sl-button class="anim-in" @click=${() => gotoRoute("/browseProjects")}>
+                Check out more projects
+              </sl-button>
+            `
+          : ""}
+        <p>&nbsp;</p>
         <h1>Favourite Projects</h1>
         <div class="projects-grid">
           ${this.favProjects == null
@@ -44,7 +62,7 @@ class FavouriteProjectsView {
                       class="project-card"
                       id="${project._id}"
                       name="${project.name}"
-                      description="${project.description}"
+                      overview="${project.overview}"
                       price="${project.price}"
                       user="${JSON.stringify(project.user)}"
                       image="${project.image}"

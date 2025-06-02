@@ -5,6 +5,10 @@ import signinView from "./views/pages/signin"
 import signupView from "./views/pages/signup"
 import profileView from "./views/pages/profile"
 import editProfileView from "./views/pages/editProfile"
+import onboarding1View from "./views/pages/onboarding1"
+import onboardingTView from "./views/pages/onboardingT"
+import onboardingVView from "./views/pages/onboardingV"
+import onboarding3View from "./views/pages/onboarding3"
 import onboardingView from "./views/pages/onboarding"
 import projectsView from "./views/pages/projects"
 import talentView from "./views/pages/talent"
@@ -16,6 +20,11 @@ import newProjectView from "./views/pages/newProject"
 const routes = {
   // 'what we're listening out for (the URL path)': what is the corresponding view
   "/": homeView,
+  "/onboarding1": onboarding1View,
+  "/onboardingT": onboardingTView,
+  "/onboardingV": onboardingVView,
+  "/onboarding3": onboarding3View,
+
   "/onboarding": onboardingView,
   "/browseProjects": projectsView,
   "/browseTalent": talentView,

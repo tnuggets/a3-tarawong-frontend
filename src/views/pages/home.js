@@ -7,25 +7,20 @@ import Utils from "./../../Utils"
 class HomeView {
   init() {
     console.log("HomeView.init")
-    document.title = "Home"
+    document.title = "Dashboard"
     this.render()
     Utils.pageIntroAnim()
   }
 
   render() {
     const template = html`
-      <va-app-header
-        title="Home"
-        user=${JSON.stringify(Auth.currentUser)}
-      ></va-app-header>
+      <va-app-header title="Dashboard" user=${JSON.stringify(Auth.currentUser)}></va-app-header>
 
       <div class="page-content">
-        <h1 class="anim-in">Hey ${Auth.currentUser.firstName}</h1>
+        <h1 class="anim-in">Hey ${Auth.currentUser.firstName}!</h1>
 
         <h3>Button example:</h3>
-        <sl-button class="anim-in" @click=${() => gotoRoute("/profile")}
-          >View Profile</sl-button
-        >
+        <sl-button class="anim-in" @click=${() => gotoRoute("/profile")}>View Profile</sl-button>
         <p>&nbsp;</p>
         <h3>Link example</h3>
         <a href="/profile" @click=${anchorRoute}>View Profile</a>

@@ -61,8 +61,8 @@ class Auth {
     Router.init()
     // redirection
     if (data.user.newUser == true) {
-      // redirect to onboarding
-      gotoRoute("/onboarding")
+      // redirect to onboarding page 1
+      gotoRoute("/onboarding1")
     } else {
       // existing user - redirect to home page (/)
       gotoRoute("/")
