@@ -8,12 +8,12 @@
   --body-bg: #0f0f0f;
 
   // colors
-  $brand-color: #0f0f0f;
+  $brand-color: #ff5c00;
   --brand-color: #{$brand-color};
-  --link-color: --brand-color;
+  --link-color: var(--brand-color);
 
   // app header
-  --app-header-height: 60px;
+  --app-header-height: 100px;
   --app-header-txt-color: #fff;
   --app-header-title-font-size: 1.6em;
 

@@ -12,12 +12,8 @@ customElements.define(
 
     static get properties() {
       return {
-        title: {
-          type: String,
-        },
-        user: {
-          type: Object,
-        },
+        title: { type: String },
+        user: { type: Object },
       }
     }
 
@@ -26,11 +22,12 @@ customElements.define(
       this.navActiveLinks()
     }
 
+    // highlight active links in the navigation
     navActiveLinks() {
       const currentPath = window.location.pathname
-      const navLinks = document.querySelectorAll(".app-top-nav a, .app-side-menu-items a")
+      const navLinks = this.querySelectorAll(".app-top-nav a, .app-side-menu-items a")
       navLinks.forEach((navLink) => {
-        if (navLink.href.slice(-1) == "#") return
+        if (navLink.href.slice(-1) === "#") return
         if (navLink.pathname === currentPath) {
           navLink.classList.add("active")
         }
@@ -38,24 +35,51 @@ customElements.define(
     }
 
     hamburgerClick() {
-      const appMenu = document.querySelector(".app-side-menu")
+      const appMenu = this.querySelector(".app-side-menu")
       appMenu.show()
     }
 
     menuClick(e) {
       e.preventDefault()
       const pathname = e.target.closest("a").pathname
-      const appSideMenu = document.querySelector(".app-side-menu")
-      // hide appMenu
+      const appSideMenu = this.querySelector(".app-side-menu")
       appSideMenu.hide()
-      appSideMenu.addEventListener("sl-after-hide", () => {
-        // goto route after menu is hidden
-        gotoRoute(pathname)
-      })
+      appSideMenu.addEventListener(
+        "sl-after-hide",
+        () => {
+          gotoRoute(pathname)
+        },
+        { once: true }
+      )
     }
 
     createRenderRoot() {
       return this
+    }
+
+    // Render navigation items
+    /**
+     * @param {boolean} isSideMenu - If true, renders for side menu; otherwise, renders for top nav.
+     * @returns {TemplateResult} The rendered navigation items.
+     */
+    renderNavItems(isSideMenu = false) {
+      return html`
+        <a href="/" @click=${isSideMenu ? this.menuClick : anchorRoute}>${isSideMenu ? "Dashboard" : "Home"}</a>
+        ${this.user && this.user.accessLevel == 2
+          ? html`<a href="/newProject" @click=${isSideMenu ? this.menuClick : anchorRoute}>Add Project</a>`
+          : ""}
+        <a href="/browseProjects" @click=${isSideMenu ? this.menuClick : anchorRoute}>Browse Projects</a>
+        <a href="/browseTalent" @click=${isSideMenu ? this.menuClick : anchorRoute}>Browse Talent</a>
+        <a href="/messages" @click=${isSideMenu ? this.menuClick : anchorRoute}>Messages</a>
+        <a href="/favouriteProjects" @click=${isSideMenu ? this.menuClick : anchorRoute}>Favourite Projects</a>
+        <a
+          href="/profile"
+          @click=${isSideMenu ? this.menuClick : anchorRoute}
+          style="display:${isSideMenu ? "block" : "none"}"
+          >Profile</a
+        >
+        <a href="#" @click=${() => Auth.signOut()} style="display:${isSideMenu ? "block" : "none"}">Sign Out</a>
+      `
     }
 
     render() {
@@ -65,7 +89,7 @@ customElements.define(
             box-sizing: border-box;
           }
           .app-header {
-            background: var(--brand-color);
+            background: var(--body-bg);
             position: fixed;
             top: 0;
             right: 0;
@@ -88,6 +112,12 @@ customElements.define(
             color: #fff;
           }
 
+          /app-logo {
+            display: flex;
+            align-items: center;
+            margin-right: 1em;
+          }
+
           .app-logo a {
             color: #fff;
             text-decoration: none;
@@ -99,6 +129,7 @@ customElements.define(
 
           .app-logo img {
             width: 90px;
+            height: auto;
           }
 
           .hamburger-btn::part(base) {
@@ -106,9 +137,21 @@ customElements.define(
           }
 
           .app-top-nav {
-            display: flex;
-            height: 100%;
+            display: flex !important;
             align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            /* Remove old height:100% and align-items:center if they cause layout issues */
+          }
+
+          .nav-links {
+            display: flex;
+            gap: 0.5em; /* adjust spacing between links */
+          }
+
+          .app-top-nav sl-dropdown {
+            margin-left: auto;
+            /* Ensures avatar stays at the far right */
           }
 
           .app-top-nav a {
@@ -146,17 +189,40 @@ customElements.define(
           .app-top-nav a.active,
           .app-side-menu-items a.active {
             font-weight: bold;
+            text-decoration: underline;
           }
 
-          /* RESPONSIVE - MOBILE ------------------- */
+          /* Hide hamburger and side menu by default (desktop) */
+          .hamburger-btn,
+          .app-side-menu {
+            display: none !important;
+          }
+
+          /* Show top nav by default */
+          .app-top-nav {
+            display: flex !important;
+          }
+
+          /* On mobile: show hamburger and side menu, hide top nav */
           @media all and (max-width: 768px) {
             .app-top-nav {
+              display: none !important;
+            }
+            .hamburger-btn,
+            .app-side-menu {
+              display: block !important;
+            }
+
+            .app-logo {
               display: none;
             }
           }
         </style>
 
         <header class="app-header">
+          <div class="app-logo">
+            <a href="/"><img src="/images/logo-white.svg" alt="Logo" /></a>
+          </div>
           <sl-icon-button
             class="hamburger-btn"
             name="list"
@@ -165,14 +231,12 @@ customElements.define(
           ></sl-icon-button>
 
           <div class="app-header-main">
-            ${this.title ? html` <h1 class="page-title">${this.title}</h1> ` : ``}
+            ${this.title ? html`<h1 class="page-title">${this.title}</h1>` : ``}
             <slot></slot>
           </div>
 
           <nav class="app-top-nav">
-            <a href="/" @click="${anchorRoute}">Home</a>
-            ${this.user.accessLevel == 2 ? html` <a href="/newProject" @click="${anchorRoute}">Add Project</a> ` : ""}
-
+            <div class="nav-links">${this.renderNavItems(false)}</div>
             <sl-dropdown>
               <a slot="trigger" href="#" @click="${(e) => e.preventDefault()}">
                 <sl-avatar
@@ -190,20 +254,9 @@ customElements.define(
           </nav>
         </header>
 
-        <sl-drawer class="app-side-menu" placement="start" class="drawer">
+        <sl-drawer class="app-side-menu" placement="start">
           <img class="app-side-menu-logo" src="/images/logo.svg" />
-          <nav class="app-side-menu-items">
-            <a href="/" @click="${this.menuClick}">Dashboard</a>
-            ${this.user.accessLevel == 2
-              ? html` <a href="/newProject" @click="${this.menuClick}">Add Project</a> `
-              : ""}
-            <a href="/browseProjects" @click="${this.menuClick}">Browse Projects</a>
-            <a href="/browseTalent" @click="${this.menuClick}">Browse Talent</a>
-            <a href="/messages" @click="${this.menuClick}">Messages</a>
-            <a href="/favouriteProjects" @click="${this.menuClick}">Favourite Projects</a>
-            <a href="/profile" @click="${this.menuClick}">Profile</a>
-            <a href="#" @click="${() => Auth.signOut()}">Sign Out</a>
-          </nav>
+          <nav class="app-side-menu-items">${this.renderNavItems(true)}</nav>
         </sl-drawer>
       `
     }

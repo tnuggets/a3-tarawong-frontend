@@ -103,6 +103,18 @@ a {
   justify-content: center;
 }
 
+// app header ---------------
+// Hide hamburger and side menu by default (desktop)
+.hamburger-btn,
+.app-side-menu {
+  display: none !important;
+}
+
+// Show top nav by default
+.app-top-nav {
+  display: flex !important;
+}
+
 // sign in + sign up pages ----------
 .signinup-page {
   position: relative;
@@ -217,5 +229,14 @@ a {
   .signinup-box {
     width: 90%;
     max-width: none;
+  }
+
+  .app-top-nav {
+    display: none !important;
+  }
+
+  .hamburger-btn,
+  .app-side-menu {
+    display: block !important;
   }
 }
