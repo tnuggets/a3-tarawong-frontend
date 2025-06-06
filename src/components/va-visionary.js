@@ -6,37 +6,16 @@ import UserAPI from "./../UserAPI"
 import Toast from "./../Toast"
 
 customElements.define(
-  "va-project",
-  class Project extends LitElement {
+  "va-visionary",
+  class Visionary extends LitElement {
     constructor() {
       super()
     }
 
     static get properties() {
       return {
-        id: {
-          type: String,
-        },
-        name: {
-          type: String,
-        },
-        overview: {
-          type: String,
-        },
-        price: {
-          type: String,
-        },
         user: {
           type: Object,
-        },
-        image: {
-          type: String,
-        },
-        location: {
-          type: String,
-        },
-        date: {
-          type: String,
         },
       }
     }
@@ -105,15 +84,6 @@ customElements.define(
       dialogEl.addEventListener("sl-after-hide", () => {
         dialogEl.remove()
       })
-    }
-
-    async addFavHandler() {
-      try {
-        await UserAPI.addFavProject(this.id)
-        Toast.show("Project added to favourites")
-      } catch (err) {
-        Toast.show(err, "error")
-      }
     }
 
     render() {

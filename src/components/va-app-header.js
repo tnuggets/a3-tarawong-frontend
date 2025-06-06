@@ -69,7 +69,6 @@ customElements.define(
           ? html`<a href="/newProject" @click=${isSideMenu ? this.menuClick : anchorRoute}>Add Project</a>`
           : ""}
         <a href="/browseProjects" @click=${isSideMenu ? this.menuClick : anchorRoute}>Browse Projects</a>
-        <a href="/browseTalent" @click=${isSideMenu ? this.menuClick : anchorRoute}>Browse Talent</a>
         <a href="/messages" @click=${isSideMenu ? this.menuClick : anchorRoute}>Messages</a>
         <a href="/favouriteProjects" @click=${isSideMenu ? this.menuClick : anchorRoute}>Favourite Projects</a>
         <a

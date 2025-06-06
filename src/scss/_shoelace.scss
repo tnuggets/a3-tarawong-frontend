@@ -10,7 +10,12 @@ sl-dialog::part(title) {
 sl-input::part(base) {
   background-color: #1a1a1a;
   border: 1px solid #333;
+  border-radius: 8px;
   color: #c52020;
+}
+.edit-profile-page sl-input::part(base) {
+  background-color: #fff;
+  border: 1px solid #ccc;
 }
 
 // sl-button
@@ -42,14 +47,6 @@ sl-button.submit-btn::part(base) {
 
 sl-button.submit-btn::part(base):hover {
   background: linear-gradient(135deg, #ff8e1a, #ff6a1a);
-}
-
-// onboarding ---------------------------
-.continue-btn-wrapper {
-  position: fixed;
-  bottom: 2em;
-  right: 2em;
-  z-index: 1000; // Ensures it stays above content
 }
 
 // onboarding 1 --------------------------
@@ -129,6 +126,30 @@ sl-button.locationOBBtn.selected::part(base) {
 
 sl-button.locationOBBtn.selected::part(label) {
   transform: translateY(2px);
+}
+
+// edit profile page --------------------------
+sl-tab::part(base) {
+  color: #171717;
+  border-radius: 10px;
+}
+sl-tab.delete-tab::part(base) {
+  color: #d32f2f !important;
+}
+sl-tab[active]::part(base) {
+  background: #e2e2e2;
+  font-weight: 600;
+}
+// Hover tab
+sl-tab::part(base):hover {
+  background: #ebebeb !important;
+  color: #232323 !important;
+  cursor: pointer;
+}
+
+// Tab panel border
+sl-tab-panel::part(base) {
+  border-top: 3px solid #ededed !important;
 }
 
 // RESPONSIVE - MOBILE -------------------

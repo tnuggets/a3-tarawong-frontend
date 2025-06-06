@@ -203,8 +203,8 @@ class ProjectsView {
                       price="${project.price}"
                       user=${JSON.stringify(project.user)}
                       image="${project.image}"
-                      gender="${project.gender}"
-                      length="${project.length}"
+                      location="${project.location}"
+                      date="${project.date}"
                     >
                     </va-project>
                   `

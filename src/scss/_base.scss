@@ -32,6 +32,33 @@ a {
   color: var(--link-color);
 }
 
+// file uploads ------------
+.file-btn {
+  display: none;
+}
+
+.custom-file-btn {
+  display: inline-block;
+  padding: 0.6em 1.5em;
+  background: var(--brand-color, #ff5c00);
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+  &:hover {
+    background: #cc4800;
+  }
+}
+
+.file-name {
+  margin-left: 1em;
+  font-size: 0.95em;
+  color: #888;
+}
+
 // app splash screen -------
 .app-splash {
   position: fixed;
@@ -103,7 +130,7 @@ a {
   justify-content: center;
 }
 
-// app header ---------------
+// APP HEADER -----------------
 // Hide hamburger and side menu by default (desktop)
 .hamburger-btn,
 .app-side-menu {
@@ -115,7 +142,7 @@ a {
   display: flex !important;
 }
 
-// sign in + sign up pages ----------
+// SIGNIN/UP PAGE ---------------
 .signinup-page {
   position: relative;
   height: 100%;
@@ -188,7 +215,7 @@ a {
   z-index: 10;
 }
 
-// guide page ---------------
+// GUIDE PAGE ---------------
 .guide-step {
   padding: 1em;
   margin: 1.5em auto;
@@ -199,13 +226,53 @@ a {
   }
 }
 
+.continue-btn-wrapper {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  z-index: 1000;
+}
+
+// PROJECTS PAGE ---------------
 .projects-grid {
   display: flex;
   flex-wrap: wrap;
+  gap: 1em;
+  align-items: stretch;
+
   .project-card {
     width: calc(33.33% - 1em);
-    margin: 0.5em;
+    min-width: 260px;
+    max-width: 350px;
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
   }
+}
+
+/* Make sure va-project and sl-card fill the card area */
+va-project.project-card,
+.project-card sl-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image in card */
+.project-card sl-card img[slot="image"] {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 0.5em 0.5em 0 0;
+}
+
+/* Ensure content is spaced out inside card */
+.project-card sl-card {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 // projects dialog ---------------
@@ -219,11 +286,101 @@ a {
   z-index: 1;
 }
 
-// edit profile page ---------------
+// EDIT PROFILE PAGE ---------------
+
+// Light background utility for full sections/pages
+.light-bg,
 .edit-profile-page {
-  background-color: #f5f5f5;
+  background: #f5f5f5 !important;
+  color: #171717 !important;
 }
 
+// Make sure headings look good on light bg
+.light-bg h1,
+.light-bg h2,
+.light-bg h3,
+.edit-profile-page h1,
+.edit-profile-page h2,
+.edit-profile-page h3 {
+  color: #171717 !important;
+}
+
+.edit-profile-form {
+  margin: 0 auto;
+  padding: 2em;
+  background-color: #fff;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  position: relative;
+}
+.edit-profile-form .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: 1em;
+}
+
+.edit-profile-tabs {
+  margin: 1em 0;
+}
+
+.acc-info-header {
+  padding: 1.5em;
+  margin: 2em 1em;
+}
+
+.edit-avatar sl-avatar::part(base) {
+  width: 150px;
+  height: 150px;
+  margin: 0 0.5em 1em;
+}
+
+.acc-info-header-row .input-group:first-child {
+  margin-bottom: 1em; // tweak as needed
+}
+
+.acc-info-header-row,
+.basic-info-row {
+  display: flex;
+  gap: 2em;
+  align-items: flex-end;
+}
+
+.acc-info-header-row .input-group,
+.basic-info-row .input-group {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.acc-info-header-row .input-group:last-child {
+  max-width: 240px;
+}
+
+.basic-info-container {
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.basic-info-header {
+  background-color: #f5f5f5;
+  padding: 1.5em 1.5em 1em 1.5em;
+}
+
+.basic-info-row,
+.basic-info-row-2 {
+  padding: 1em 1.5em;
+}
+
+//RESPONSIVE - DESKTOP -------------------
+@media all and (max-width: 1100px) {
+  .projects-grid .project-card {
+    width: calc(50% - 1em);
+  }
+}
 // RESPONSIVE - MOBILE -------------------
 @media all and (max-width: 768px) {
   .signinup-box {
@@ -238,5 +395,30 @@ a {
   .hamburger-btn,
   .app-side-menu {
     display: block !important;
+  }
+  // projects page
+  .projects-grid .project-card {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    height: 320px;
+  }
+  // Edit Profile Page
+  .acc-info-header-row,
+  .basic-info-row {
+    flex-direction: column;
+    gap: 1em;
+  }
+  .acc-info-header-row .input-group,
+  .basic-info-row .input-group,
+  .acc-info-header-row .input-group:last-child {
+    max-width: 100%;
+  }
+  .edit-profile-form .form-actions {
+    justify-content: center;
+  }
+  .edit-profile-form .form-actions .submit-btn {
+    width: 100%;
+    max-width: 260px;
   }
 }

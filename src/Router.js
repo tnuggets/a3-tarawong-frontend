@@ -15,6 +15,7 @@ import talentView from "./views/pages/talent"
 import messagesView from "./views/pages/messages"
 import favouriteProjectsView from "./views/pages/favouriteProjects"
 import newProjectView from "./views/pages/newProject"
+//import portfolioView from "./views/pages/portfolio"
 
 // define routes
 const routes = {
@@ -36,6 +37,7 @@ const routes = {
   "/profile": profileView,
   "/editProfile": editProfileView,
   "/newProject": newProjectView,
+  //"/portfolio": portfolioView,
 }
 
 class Router {
