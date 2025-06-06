@@ -133,15 +133,15 @@ class EditProfileView {
                             value="${this.user.pronouns}"
                             placeholder="What are your pronouns?"
                           >
-                            <sl-option value="1">She/Her</sl-option>
-                            <sl-option value="2">He/Him</sl-option>
-                            <sl-option value="3">They/Them</sl-option>
-                            <sl-option value="4">Ze/Hir</sl-option>
-                            <sl-option value="5">Xe/Xem</sl-option>
-                            <sl-option value="6">Ver/Vir</sl-option>
-                            <sl-option value="7">Te/Tem</sl-option>
-                            <sl-option value="8">Ey/Em</sl-option>
-                            <sl-option value="9">Other</sl-option>
+                            <sl-option value="She/Her">She/Her</sl-option>
+                            <sl-option value="He/Him">He/Him</sl-option>
+                            <sl-option value="They/Them">They/Them</sl-option>
+                            <sl-option value="Ze/Hir">Ze/Hir</sl-option>
+                            <sl-option value="Xe/Xem">Xe/Xem</sl-option>
+                            <sl-option value="Ver/Vir">Ver/Vir</sl-option>
+                            <sl-option value="Te/Tem">Te/Tem</sl-option>
+                            <sl-option value="Ey/Em">Ey/Em</sl-option>
+                            <sl-option value="Other">Other</sl-option>
                           </sl-select>
                         </div>
                         <div class="input-group">
